@@ -11,9 +11,11 @@ import com.example.roomate.dto.request.CommentRequestDto;
 import com.example.roomate.dto.response.CommentResponseDto;
 import com.example.roomate.dto.response.ResponseDto;
 import com.example.roomate.entity.Comment;
+import com.example.roomate.entity.Member;
 import com.example.roomate.entity.Post;
 import com.example.roomate.jwt.TokenProvider;
 import com.example.roomate.repository.CommentRepository;
+import com.example.roomate.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final PostCommentHeartRepository postCommentHeartRepository;
+    private final HeartRepository heartRepository;
 
     private final TokenProvider tokenProvider;
     private final PostService postService;
@@ -51,7 +53,7 @@ public class CommentService {
         }
 
         // 댓글 수 수정
-        post.comment_cnt_Up();
+//        post.comment_cnt_Up();
 
         Comment comment = Comment.builder()
                 .member(member)
@@ -73,7 +75,7 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseDto<?> createReply(Long parent_id, CommentRequestDto requestDto, HttpServletRequest request) {
+    public ResponseDto<?> createReply(Long commentId, CommentRequestDto requestDto, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");
@@ -105,7 +107,7 @@ public class CommentService {
                 .post(post)
                 .content(requestDto.getContent())
 //                .parent(parent)
-                .replies(commentRepository.findAllByPostAndParent(post, parent))
+                .replies(commentRepository.findAllByPostAndComment(post, comment))
                 .build();
         commentRepository.save(reply);
 
@@ -129,18 +131,18 @@ public class CommentService {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
-        List<Comment> commentList = commentRepository.findAllByPostAndParent(post, null);
+        List<Comment> commentList = commentRepository.findAllByPostAndComment(post, null);
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
 
         for (Comment comment : commentList) {
             commentResponseDtoList.add(
                     CommentResponseDto.builder()
                             .id(comment.getId())
-                            .author(comment.getMember().getNickname())
+                            .member(comment.getMember().getNickname())
                             .content(comment.getContent())
-                            .heartNum(postCommentHeartRepository.countAllByCommentId(comment.getId()))
-                            .createdAt(comment.getCreatedAt())
-                            .modifiedAt(comment.getModifiedAt())
+                            .heartNum(heartRepository.countAllByCommentId(comment.getId()))
+//                            .createdAt(comment.getCreatedAt())
+//                            .modifiedAt(comment.getModifiedAt())
                             .replies(replyListExtractor(post, comment))
                             .build()
             );
@@ -149,7 +151,7 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseDto<?> updateComment(Long comment_id, CommentRequestDto requestDto, HttpServletRequest request) {
+    public ResponseDto<?> updateComment(Long commentId, CommentRequestDto requestDto, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");
@@ -170,7 +172,7 @@ public class CommentService {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
-        Comment comment = isPresentComment(comment_id);
+        Comment comment = isPresentComment(commentId);
         if (null == comment) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 댓글 id 입니다.");
         }
@@ -186,7 +188,7 @@ public class CommentService {
                         .id(comment.getId())
                         .member(comment.getMember().getNickname())
                         .content(comment.getContent())
-                        .heartNum(postCommentHeartRepository.countAllByCommentId(comment.getId()))
+                        .heartNum(heartRepository.countAllByCommentId(comment.getId()))
 //                        .createdAt(comment.getCreatedAt())
 //                        .modifiedAt(comment.getModifiedAt())
                         .replies(replyListExtractor(post, comment))
@@ -195,7 +197,7 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseDto<?> deleteComment(Long comment_id, HttpServletRequest request) {
+    public ResponseDto<?> deleteComment(Long commentId, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
             return ResponseDto.fail("MEMBER_NOT_FOUND",
                     "로그인이 필요합니다.");
@@ -243,20 +245,20 @@ public class CommentService {
     }
 
     @Transactional
-    public List<ReplyResponseDto> replyListExtractor(Post post, Comment parent_comment) {
+    public List<ReplyResponseDto> replyListExtractor(Post post, Comment comment) {
 
-        List<Comment> replyList = commentRepository.findAllByPostAndParent(post, parent_comment);
+        List<Comment> replyList = commentRepository.findAllByPostAndComment(post, comment);
         List<ReplyResponseDto> replyResponseDtoList = new ArrayList<>();
 
         for (Comment reply : replyList) {
             replyResponseDtoList.add(
                     ReplyResponseDto.builder()
                             .id(reply.getId())
-                            .parentId(parent_comment.getId())
-                            .author(reply.getMember().getNickname())
+                            .commentId(comment.getId())
+                            .member(reply.getMember().getNickname())
                             .content(reply.getContent())
-                            .createdAt(reply.getCreatedAt())
-                            .modifiedAt(reply.getModifiedAt())
+//                            .createdAt(reply.getCreatedAt())
+//                            .modifiedAt(reply.getModifiedAt())
                             .build()
             );
         }
