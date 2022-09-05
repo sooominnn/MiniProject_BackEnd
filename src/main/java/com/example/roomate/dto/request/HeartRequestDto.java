@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HeartRequestDto {
-    private Long id;
+    private Long postId;
+    private Long commentId;
 }
