@@ -30,6 +30,11 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "C:/Users/lsm98/OneDrive/Desktop/assignment-11team"
+  }
+}]]></component>
   <component name="RunManager">
     <configuration name="RoomateApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="roomate.main" />
