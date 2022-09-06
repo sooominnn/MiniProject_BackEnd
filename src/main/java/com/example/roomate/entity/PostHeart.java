@@ -1,21 +1,18 @@
 package com.example.roomate.entity;
 
-import com.example.roomate.dto.request.CommentRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Comment extends Timestamped {
-
+public class PostHeart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,20 +26,6 @@ public class Comment extends Timestamped {
     private Post post;
 
     @Column(nullable = false)
-    private String content;
+    private boolean heartOn; // true = 좋아요, false = 좋아요 취소
 
-    @Column
-    private Long heartNum;
-
-
-    @OneToMany(mappedBy = "comment", orphanRemoval = true)
-    private List<CommentHeart> cmtHeart;
-
-    public void update(CommentRequestDto commentRequestDto) {
-        this.content = commentRequestDto.getContent();
-    }
-
-    public boolean validateMember(Member member) {
-        return !this.member.equals(member);
-    }
 }

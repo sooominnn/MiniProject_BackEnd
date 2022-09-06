@@ -1,21 +1,18 @@
 package com.example.roomate.dto.response;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentResponseDto {
+public class GetAllPostResponseDto {
     private Long id;
-    private String member;
-    private String content;
+    private String title;
+    private String imageUrl;
     private Long heartNum;
-    private List<HeartResponseDto> hearts;
+    private boolean heartOn;
 }

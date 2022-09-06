@@ -38,7 +38,7 @@ public class TokenProvider {
     public static final String ACCESS_TOKEN = "Access-Token";
     public static final String REFRESH_TOKEN = "Refresh-Token";
     private static final long ACCESS_TOKEN_TIME = 1000 * 60 * 15;            //유효 15분
-    private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24;       //유효 1일
+    private static final long REFRESH_TOKEN_TIME = 1000 * 60 * 60 * 24 * 7;       //유효 7일
 
     @Value("${jwt.secret.key}")
     private String secretKey;
