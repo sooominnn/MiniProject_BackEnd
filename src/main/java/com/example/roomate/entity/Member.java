@@ -6,10 +6,7 @@ import com.example.roomate.dto.request.SignupRequestDto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -19,8 +16,13 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String member;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String nickname;
 
     public Member () {}

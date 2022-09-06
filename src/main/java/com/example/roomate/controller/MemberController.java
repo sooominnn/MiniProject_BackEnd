@@ -15,19 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
-//@RequestMapping("/member")
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
 
-    @PostMapping("/member/signup")
+    @PostMapping("/signup")
     public GlobalResDto signup(@RequestBody @Valid SignupRequestDto signupRequestDto) {
         return memberService.signup(signupRequestDto);
+//        return "redirect:/member/login"
     }
 
-    @PostMapping("/member/login")
+    @PostMapping("/login")
     public GlobalResDto login(@RequestBody @Valid LoginRequestDto loginRequestDto, HttpServletResponse response) {
         return memberService.login(loginRequestDto, response);
     }

@@ -58,8 +58,8 @@ public class SecurityConfig {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests().antMatchers("/member/**", "/post").permitAll()
-                .anyRequest().authenticated();
-//                .and().addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .anyRequest().authenticated()
+                .and().addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
 //                .apply(new JwtSecurityConfiguration(SECRET_KEY, tokenProvider, userDetailsService));
 
         return http.build();
@@ -76,7 +76,7 @@ public class SecurityConfig {
 //                .allowedMethods("*") // 기타 설정
 //                .allowedHeaders("*");
 
-    @Bean // front cors 허용
+    @Bean // cors 허용
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000");

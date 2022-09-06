@@ -9,7 +9,6 @@ import com.example.roomate.jwt.TokenDto;
 import com.example.roomate.jwt.TokenProvider;
 import com.example.roomate.repository.MemberRepository;
 import com.example.roomate.repository.RefreshTokenRepository;
-import com.example.roomate.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
@@ -38,7 +37,7 @@ public class MemberService {
     public GlobalResDto signup(SignupRequestDto signupRequestDto) {
         // userId 중복 검사
         if (memberRepository.findByMember(signupRequestDto.getMember()).isPresent()) {
-            throw new RuntimeException("SignUp Fail Cause Overlap");
+            throw new RuntimeException("중복된 회원정보가 존재합니다.");
         }
 
         signupRequestDto.setPassword(passwordEncoder.encode(signupRequestDto.getPassword()));
