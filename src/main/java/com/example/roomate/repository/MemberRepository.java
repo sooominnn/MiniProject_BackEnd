@@ -1,4 +1,11 @@
 package com.example.roomate.repository;
 
-public interface MemberRepository {
+import com.example.roomate.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+
+    Optional<Member> findByMember (String member);
 }
