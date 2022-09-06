@@ -1,13 +1,13 @@
 package com.example.roomate.entity;
 
-import javax.persistence.*;
-
 import com.example.roomate.dto.request.CommentRequestDto;
+import com.sun.tools.javac.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 
 
 @Builder
@@ -21,7 +21,7 @@ public class Comment extends Timestamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "memberId", nullable = false)
+    @JoinColumn(name = "member", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
@@ -37,7 +37,7 @@ public class Comment extends Timestamped {
 
 
     @OneToMany(mappedBy = "comment", orphanRemoval = true)
-    private List<CmtHeart> cmtHeart;
+    private List<CommentHeart> cmtHeart;
 
     public void update(CommentRequestDto commentRequestDto) {
         this.content = commentRequestDto.getContent();

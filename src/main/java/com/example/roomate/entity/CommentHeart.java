@@ -12,22 +12,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Heart {
+public class CommentHeart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "memberId", nullable = false)
+    @JoinColumn(name = "member", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
     @JoinColumn(name = "commentId", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Comment comment;
-
-    @JoinColumn(name = "postId", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Post post;
-
 
 }

@@ -14,8 +14,8 @@ import com.example.roomate.entity.Comment;
 import com.example.roomate.entity.Member;
 import com.example.roomate.entity.Post;
 import com.example.roomate.jwt.TokenProvider;
+import com.example.roomate.repository.CommentHeartRepository;
 import com.example.roomate.repository.CommentRepository;
-import com.example.roomate.repository.HeartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final HeartRepository heartRepository;
+    private final CommentHeartRepository commentHeartRepository;
     private final TokenProvider tokenProvider;
     private final PostService postService;
 
@@ -67,61 +67,10 @@ public class CommentService {
                         .member(comment.getMember().getNickname())
                         .content(comment.getContent())
                         .heartNum(comment.getHeartNum())
-//                        .createdAt(comment.getCreatedAt())
-//                        .modifiedAt(comment.getModifiedAt())
                         .build()
         );
     }
 
-//    @Transactional
-//    public ResponseDto<?> createReply(Long commentId, CommentRequestDto requestDto, HttpServletRequest request) {
-//        if (null == request.getHeader("Refresh-Token")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
-//
-//        if (null == request.getHeader("Authorization")) {
-//            return ResponseDto.fail("MEMBER_NOT_FOUND",
-//                    "로그인이 필요합니다.");
-//        }
-//
-//        Member member = validateMember(request);
-//        if (null == member) {
-//            return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
-//        }
-//
-//        Post post = postService.isPresentPost(requestDto.getPostId());
-//        if (null == post) {
-//            return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
-//        }
-
-//        Comment parent = hasParentComment(parent_id);
-//        if (parent.getParent() != null) {
-//            return ResponseDto.fail("BAD REQUEST",
-//                    "대댓글에는 댓글을 달 수 없습니다.");
-//        }
-//      대댓글
-//        Comment reply = Comment.builder()
-//                .member(member)
-//                .post(post)
-//                .content(requestDto.getContent())
-////                .parent(parent)
-//                .replies(commentRepository.findAllByPostAndComment(post, comment))
-//                .build();
-//        commentRepository.save(reply);
-//
-//        return ResponseDto.success(
-//                ReplyResponseDto.builder()
-//                        .id(reply.getId())
-////                        .parentId(reply.getParent().getId())
-//                        .member(reply.getMember().getNickname())
-//                        .content(reply.getContent())
-//                        .heartNum(reply.getHeartNum())
-////                        .createdAt(reply.getCreatedAt())
-////                        .modifiedAt(reply.getModifiedAt())
-//                        .build()
-//        );
-//    }
 
     @Transactional(readOnly = true)
     public ResponseDto<?> getAllCommentsByPost(Long postId) {
@@ -139,15 +88,13 @@ public class CommentService {
                             .id(comment.getId())
                             .member(comment.getMember().getNickname())
                             .content(comment.getContent())
-                            .heartNum(heartRepository.countAllByCommentId(comment.getId()))
-//                            .createdAt(comment.getCreatedAt())
-//                            .modifiedAt(comment.getModifiedAt())
-//                            .replies(replyListExtractor(post, comment))
+                            .heartNum(commentHeartRepository.countAllByCommentId(comment.getId()))
                             .build()
             );
         }
         return ResponseDto.success(commentResponseDtoList);
     }
+
 
     @Transactional
     public ResponseDto<?> updateComment(Long commentId, CommentRequestDto requestDto, HttpServletRequest request) {
@@ -180,20 +127,17 @@ public class CommentService {
             return ResponseDto.fail("BAD_REQUEST", "작성자만 수정할 수 있습니다.");
         }
 
-
         comment.update(requestDto);
         return ResponseDto.success(
                 CommentResponseDto.builder()
                         .id(comment.getId())
                         .member(comment.getMember().getNickname())
                         .content(comment.getContent())
-                        .heartNum(heartRepository.countAllByCommentId(comment.getId()))
-//                        .createdAt(comment.getCreatedAt())
-//                        .modifiedAt(comment.getModifiedAt())
-//                        .replies(replyListExtractor(post, comment))
+                        .heartNum(commentHeartRepository.countAllByCommentId(comment.getId()))
                         .build()
         );
     }
+
 
     @Transactional
     public ResponseDto<?> deleteComment(Long commentId, HttpServletRequest request) {
@@ -236,37 +180,10 @@ public class CommentService {
         Optional<Comment> optionalComment = commentRepository.findById(id);
         return optionalComment.orElse(null);
     }
-////
-////    @Transactional(readOnly = true)
-////    public Comment hasParentComment(Long parent_id) {
-////        Optional<Comment> parent = commentRepository.findById(parent_id);
-////        return parent.orElse(null);
-//    }
-
-//    @Transactional
-//    public List<ReplyResponseDto> replyListExtractor(Post post, Comment comment) {
-//
-//        List<Comment> replyList = commentRepository.findAllByPostAndComment(post, comment);
-//        List<ReplyResponseDto> replyResponseDtoList = new ArrayList<>();
-//
-//        for (Comment reply : replyList) {
-//            replyResponseDtoList.add(
-//                    ReplyResponseDto.builder()
-//                            .id(reply.getId())
-//                            .commentId(comment.getId())
-//                            .member(reply.getMember().getNickname())
-//                            .content(reply.getContent())
-////                            .createdAt(reply.getCreatedAt())
-////                            .modifiedAt(reply.getModifiedAt())
-//                            .build()
-//            );
-//        }
-//        return replyResponseDtoList;
-//    }
 
     @Transactional
     public Member validateMember(HttpServletRequest request) {
-        if (!tokenProvider.validateToken(request.getHeader("Refresh-Token"))) {
+        if (!tokenProvider.tokenValidation(request.getHeader("Refresh-Token"))) {
             return null;
         }
         return tokenProvider.getMemberFromAuthentication();
