@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="092c0396-ac4c-4cd8-ab76-097feb69715d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/CommentHeart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/CommentHeartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/PostHeartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/CommentHeartService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/HeartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/HeartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Heart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/PostHeart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/HeartRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/HeartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostHeartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/PostResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/PostResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662422908831</updated>
-      <workItem from="1662422912062" duration="4024000" />
+      <workItem from="1662422912062" duration="6984000" />
     </task>
     <servers />
   </component>
