@@ -7,7 +7,6 @@ import com.example.roomate.entity.Post;
 import com.example.roomate.entity.PostHeart;
 import com.example.roomate.jwt.TokenProvider;
 import com.example.roomate.repository.PostHeartRepository;
-import com.example.roomate.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,7 @@ public class PostHeartService {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
-        PostHeart findPostHeart = postHeartRepository.findByPostIdAndMemberId(post.getPostId(), member.getId());
+        PostHeart findPostHeart = postHeartRepository.findByPostIdAndMemberId(post.getId(), member.getId());
         if ( null != findPostHeart ) {
             postHeartRepository.delete(findPostHeart);
             return  ResponseDto.success("좋아요 취소");

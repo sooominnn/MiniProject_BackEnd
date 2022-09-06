@@ -25,5 +25,8 @@ public class PostHeart {
     @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
 
+    @Column(nullable = false)
+    private boolean heartOn; // true = 좋아요, false = 좋아요 취소
+
 
 }

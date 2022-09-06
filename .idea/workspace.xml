@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="092c0396-ac4c-4cd8-ab76-097feb69715d" name="Changes" comment="">
+    <list default="true" id="5460491f-d3cd-484b-9bf1-ee788d584909" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/GetAllPostResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/MainController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/CommentResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/CommentResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/MainResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/MainResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/PostResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/dto/response/PostResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/CommentHeart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/CommentHeart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/PostHeart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/entity/PostHeart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/jwt/jwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/jwt/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/MainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/MainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostHeartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostHeartService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/roomate/service/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +37,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="roomate" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -37,12 +52,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -62,10 +82,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/lsm98/OneDrive/Desktop/assignment-11team",
+    "last_opened_file_path": "C:/Users/lsm98/OneDrive/Desktop/MiniProject_06",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "spring.configuration.checksum": "e7fed44d49d7bb6fa13a4ea82675a245"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lsm98\OneDrive\Desktop\innovation\4주차\MiniProject_BackEnd" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.roomate.jwt" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="roomate.test" />
@@ -91,12 +122,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="092c0396-ac4c-4cd8-ab76-097feb69715d" name="Changes" comment="" />
+      <changelist id="5460491f-d3cd-484b-9bf1-ee788d584909" name="Changes" comment="" />
       <created>1662422908831</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1662422908831</updated>
       <workItem from="1662422912062" duration="6984000" />
+      <workItem from="1662477340234" duration="6997000" />
     </task>
     <servers />
   </component>

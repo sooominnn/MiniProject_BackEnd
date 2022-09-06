@@ -25,4 +25,8 @@ public class CommentHeart {
     @ManyToOne(fetch = FetchType.LAZY)
     private Comment comment;
 
+    @Column(nullable = false)
+    private boolean heartOn; // true = 좋아요, false = 좋아요 취소
+
+
 }

@@ -17,5 +17,6 @@ public class PostResponseDto {
     private String content;
     private Long heartNum;
     private String imageUrl;
+    private List<HeartResponseDto> hearts;
     private List<CommentResponseDto> comments;
 }
