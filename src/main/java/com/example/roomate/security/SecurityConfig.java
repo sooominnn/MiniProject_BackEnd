@@ -57,7 +57,7 @@ public class SecurityConfig {
 //                .accessDeniedHandler(accessDeniedHandlerException);
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests().antMatchers("/member/**", "/post").permitAll()
+                .and().authorizeRequests().antMatchers("/**", "/member/**", "/post/**").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
 //                .apply(new JwtSecurityConfiguration(SECRET_KEY, tokenProvider, userDetailsService));

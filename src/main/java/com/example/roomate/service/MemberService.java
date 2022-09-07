@@ -35,6 +35,7 @@ public class MemberService {
 //    @Override
     @Transactional
     public GlobalResDto signup(SignupRequestDto signupRequestDto) {
+//        System.out.println(signupRequestDto);
         // userId 중복 검사
         if (memberRepository.findByMember(signupRequestDto.getMember()).isPresent()) {
             throw new RuntimeException("중복된 회원정보가 존재합니다.");
@@ -46,6 +47,7 @@ public class MemberService {
 
         return new GlobalResDto("회원가입을 축하합니다.", HttpStatus.OK.value());
     }
+
 
 //    @Override
     @Transactional
