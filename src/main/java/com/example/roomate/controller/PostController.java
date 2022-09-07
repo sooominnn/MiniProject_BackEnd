@@ -17,10 +17,10 @@ public class PostController {
         return postService.getPost(id);
     }
 
-    @RequestMapping(value = "/post", method = RequestMethod.GET)
-    public ResponseDto<?> getAllPosts() {
-        return postService.getAllPost();
-    }
+//    @RequestMapping(value = "/post", method = RequestMethod.GET)
+//    public ResponseDto<?> getAllPosts() {
+//        return postService.getAllPost();
+//    }
 
 
 

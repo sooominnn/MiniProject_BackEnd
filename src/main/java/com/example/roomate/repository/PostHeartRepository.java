@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface PostHeartRepository extends JpaRepository<PostHeart, Long> {
     Long countAllByPostId(Long postId);
+
+    Boolean searchPostHeart(Long postId, Long memberId);
     PostHeart findByPostIdAndMemberId(Long postId, Long memberId);
     List<PostHeart> findAllByMember(Member member);
 }

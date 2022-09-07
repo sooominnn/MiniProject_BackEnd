@@ -62,27 +62,6 @@ public class PostService {
                         .build()
         );
     }
-
-    @Transactional(readOnly = true)
-    public ResponseDto<?> getAllPost() {
-
-        List<Post> allPosts = postRepository.findAllByOrderByModifiedAtDesc();
-        List<GetAllPostResponseDto> getAllPostResponseDtoList = new ArrayList<>();
-
-        for (Post post : allPosts) {
-            getAllPostResponseDtoList.add(
-                    GetAllPostResponseDto.builder()
-                            .id(post.getId())
-                            .title(post.getTitle())
-                            .member(post.getMember().getNickname())
-                            .heartNum(postHeartRepository.countAllByPostId(post.getId()))
-                            .build()
-            );
-        }
-        return ResponseDto.success(getAllPostResponseDtoList);
-    }
-
-
     @Transactional(readOnly = true)
     public Post isPresentPost(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);

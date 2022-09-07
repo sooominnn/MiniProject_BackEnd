@@ -1,14 +1,12 @@
 package com.example.roomate.service;
 
 
-import com.example.roomate.dto.response.CommentResponseDto;
+import com.example.roomate.dto.response.GetAllPostResponseDto;
 import com.example.roomate.dto.response.MainResponseDto;
 import com.example.roomate.dto.response.PostResponseDto;
 import com.example.roomate.dto.response.ResponseDto;
 import com.example.roomate.entity.*;
 import com.example.roomate.jwt.TokenProvider;
-import com.example.roomate.repository.CommentHeartRepository;
-import com.example.roomate.repository.CommentRepository;
 import com.example.roomate.repository.PostHeartRepository;
 import com.example.roomate.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class MainService {
+
+    private final Post post;
     private final PostRepository postRepository;
     private final PostHeartRepository postHeartRepository;
-
-    private final CommentRepository commentRepository;
-
-    private final CommentHeartRepository commentHeartRepository;
-
     private final TokenProvider tokenProvider;
 
     @Transactional
@@ -48,31 +43,47 @@ public class MainService {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
 
-        // 게시글
-        List<Post> myPostList = postRepository.findAllByMember(member);
-        List<PostResponseDto> myPostResponseDtoList = new ArrayList<>();
+        // 게시글, heartOn 추가해야함.
+        List<Post> postList = postRepository.findAllByMember(member);
+        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
 
-        for (Post post : myPostList) {
-            myPostResponseDtoList.add(
+        for (Post post : postList) {
+            postResponseDtoList.add(
                     PostResponseDto.builder()
                             .id(post.getId())
                             .title(post.getTitle())
-                            .member(post.getMember().getNickname())
                             .content(post.getContent())
                             .heartNum(postHeartRepository.countAllByPostId(post.getId()))
                             .build()
             );
         }
-
-
         return ResponseDto.success(
                 MainResponseDto.builder()
-                        .myPosts(myPostResponseDtoList)
+                        .posts(postResponseDtoList)
                         .build()
         );
     }
+    Long heartNum = postHeartRepository.countAllByPostId(post.getId());
 
+    @Transactional(readOnly = true)
+    public ResponseDto<?> getAllPost() {
 
+        List<Post> allPosts = postRepository.findAllByOrderByModifiedAtDesc();
+        List<GetAllPostResponseDto> getAllPostResponseDtoList = new ArrayList<>();
+
+        for (Post post : allPosts) {
+            getAllPostResponseDtoList.add(
+                    GetAllPostResponseDto.builder()
+                            .id(post.getId())
+                            .title(post.getTitle())
+                            .member(post.getMember().getNickname())
+                            .heartOn(postHeartRepository.searchPostHeart(post.getId(), member.getId())
+                            .heartNum(postHeartRepository.countAllByPostId(post.getId()))
+                            .build()
+            );
+        }
+        return ResponseDto.success(getAllPostResponseDtoList);
+    }
     @Transactional
     public Member validateMember(HttpServletRequest request) {
         if (!tokenProvider.tokenValidation(request.getHeader("Refresh-Token"))) {

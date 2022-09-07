@@ -12,8 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MainResponseDto {
-    private List<PostResponseDto> myPosts;
-    private List<CommentResponseDto> myComments;
+    private List<PostResponseDto> posts;
     private List<PostResponseDto> heartedPosts;
-    private List<CommentResponseDto> heartedComments;
 }
