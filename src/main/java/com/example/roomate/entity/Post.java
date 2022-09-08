@@ -21,9 +21,9 @@ public class Post {
 
     @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
-    private String content;
+//
+//    @Column(nullable = false)
+//    private String content;
 
     @Column
     private Long heartNum;
@@ -31,14 +31,15 @@ public class Post {
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @Column
-    private String imageUrl;
+//    @Column
+//    private String imageUrl;
 
-    @JoinColumn(name = "member", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+//    @JoinColumn(name = "member", nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Member member;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostHeart> postHeart;
+
 
 }

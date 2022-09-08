@@ -14,11 +14,11 @@ import java.util.List;
 public class PostResponseDto {
     private Long id;
     private String title;
-    private String member;
-    private String content;
+//    private String member;
+//    private String content;
     private Long heartNum;
     private boolean heartOn;
-    private String imageUrl;
+//    private String imageUrl;
 //    private List<HeartResponseDto> hearts;
     private List<CommentResponseDto> comments;
 }
