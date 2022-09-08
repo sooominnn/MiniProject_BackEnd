@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetAllPostResponseDto {
     private Long id;
-    private String title;
-    private String imageUrl;
+//    private String title;
+//    private String imageUrl;
     private Long heartNum;
     private boolean heartOn;
 }

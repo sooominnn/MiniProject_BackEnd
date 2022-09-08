@@ -1,12 +1,13 @@
 package com.example.roomate.controller;
 
+import com.example.roomate.dto.request.PostRequestDto;
 import com.example.roomate.dto.response.ResponseDto;
 import com.example.roomate.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,4 +24,10 @@ public class PostController {
     public ResponseDto<?> getAllPosts() {
         return postService.getAllPost();
     }
+
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto) {
+        return postService.createPost(requestDto);
+    }
+
 }

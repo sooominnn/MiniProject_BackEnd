@@ -17,5 +17,5 @@ public class CommentResponseDto {
     private String member;
     private String content;
     private Long heartNum;
-    private List<HeartResponseDto> hearts;
+//    private List<HeartResponseDto> hearts;
 }
